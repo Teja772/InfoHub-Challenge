@@ -1,30 +1,28 @@
+// [PASTE THIS ENTIRE BLOCK INTO YOUR api/index.js FILE]
+
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-require('dotenv').config();
+// The "require('dotenv').config()" line is GONE. This is the fix.
 
 const app = express();
 app.use(cors());
 
+// Vercel gets these from your "Environment Variables" settings
 const WEATHER_KEY = process.env.WEATHER_API_KEY;
 const CURRENCY_KEY = process.env.CURRENCY_API_KEY;
 
-// --- API #1: QUOTE (Upgraded to Live API) ---
+// --- API #1: QUOTE (Live API) ---
 app.get('/api/quote', async (req, res) => {
     try {
-        // Call the external Quotable API
         const response = await axios.get('https://api.quotable.io/random');
-        
-        // Simplify the response to match our frontend
         const data = {
             quote: response.data.content,
             author: response.data.author
         };
         res.json(data);
-
     } catch (error) {
         console.error("Quote API Error:", error.message);
-        // Fallback to a single mock quote if the API fails
         res.status(500).json({ 
             quote: "The only way to do great work is to love what you do.", 
             author: "Steve Jobs (Fallback)" 
@@ -36,7 +34,6 @@ app.get('/api/quote', async (req, res) => {
 app.get('/api/weather', async (req, res) => {
     const { lat, lon, city } = req.query;
     let url;
-
     try {
         if (lat && lon) {
             url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}&units=metric`;
@@ -44,7 +41,6 @@ app.get('/api/weather', async (req, res) => {
             const defaultCity = city || "London"; 
             url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&appid=${WEATHER_KEY}&units=metric`;
         }
-        
         const response = await axios.get(url);
         const simplifiedData = {
             temperature: `${Math.round(response.data.main.temp)}°C`,
@@ -52,7 +48,6 @@ app.get('/api/weather', async (req, res) => {
             city: response.data.name 
         };
         res.json(simplifiedData);
-
     } catch (error) {
         console.error("Weather API Error:", error.message);
         res.status(500).json({ error: "Could not fetch weather. Check API key." });

@@ -1,5 +1,3 @@
-// [PASTE THIS ENTIRE BLOCK INTO client/src/components/WeatherModule.jsx]
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 

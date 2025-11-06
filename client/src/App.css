@@ -1,0 +1,40 @@
+/* [PASTE THIS INTO src/App.css] */
+:root {
+  --primary-color: #007bff; --bg-color: #f4f7f6; --card-bg: #ffffff;
+  --text-color: #333; --border-color: #e0e0e0;
+}
+body {
+  margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color); color: var(--text-color);
+  display: flex; justify-content: center; padding-top: 40px;
+}
+.app-container { width: 90%; max-width: 600px; margin: 0 auto; text-align: center; }
+.app-header { margin-bottom: 2rem; }
+.app-header h1 { color: var(--primary-color); margin-bottom: 0.5rem; }
+.app-nav { display: flex; justify-content: center; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); }
+.app-nav button {
+  background: none; border: none; font-size: 1.1rem; padding: 1rem 1.5rem; cursor: pointer;
+  color: #666; border-bottom: 3px solid transparent; transition: all 0.3s ease;
+}
+.app-nav button:hover { color: var(--primary-color); }
+.app-nav button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+.app-content {
+  background: var(--card-bg); border-radius: 8px; padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); min-height: 150px;
+}
+.loading-text, .error-text { font-size: 1.1rem; color: #888; }
+.error-text { color: #d9534f; }
+.quote-module blockquote { font-size: 1.5rem; margin: 0; font-style: italic; }
+.quote-module p { font-size: 1.1rem; text-align: right; margin-top: 1rem; color: #555; }
+.weather-module h3 { font-size: 2.5rem; margin: 0; color: var(--primary-color); }
+.weather-module p { font-size: 1.2rem; margin-top: 0.5rem; }
+.currency-converter { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.currency-converter input {
+  font-size: 1rem; padding: 10px; border-radius: 5px; border: 1px solid var(--border-color);
+}
+.currency-converter button {
+  font-size: 1rem; padding: 10px 20px; border: none; border-radius: 5px;
+  background-color: var(--primary-color); color: white; cursor: pointer;
+}
+.currency-results { margin-top: 15px; text-align: left; }
+.currency-results p { font-size: 1.1rem; margin: 0.5rem 0; }

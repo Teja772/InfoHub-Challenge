@@ -1,10 +1,11 @@
 // [PASTE THIS ENTIRE BLOCK INTO YOUR api/index.js FILE]
 
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-// The "require('dotenv').config()" line is GONE. This is the fix.
+// 1. Import all tools using the NEW 'import' syntax
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
 
+// 2. Create the server
 const app = express();
 app.use(cors());
 
@@ -79,5 +80,5 @@ app.get('/api/currency', async (req, res) => {
     }
 });
 
-// Export the app for Vercel
-module.exports = app;
+// Export the app for Vercel using the new 'export default' syntax
+export default app;

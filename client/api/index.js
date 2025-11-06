@@ -1,5 +1,3 @@
-// [PASTE THIS ENTIRE BLOCK INTO YOUR api/index.js FILE]
-
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';

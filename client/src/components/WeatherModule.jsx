@@ -6,8 +6,6 @@ import axios from 'axios';
 function WeatherModule() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
-  // This line is now corrected and will fix the blank page
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -57,12 +55,16 @@ function WeatherModule() {
   if (isLoading) return <p className="loading-text">Getting your location & weather...</p>;
   if (error) return <p className="error-text">{error}</p>;
 
-  // Display the final result
+  // --- THIS IS THE FIX ---
+  // We add 'data && (...)'
+  // This tells React to only render this block IF data is not null.
   return (
-    <div className="module weather-module">
-      <h3>{data.temperature}</h3>
-      <p>{data.condition} in {data.city}</p>
-    </div>
+    data && (
+      <div className="module weather-module">
+        <h3>{data.temperature}</h3>
+        <p>{data.condition} in {data.city}</p>
+      </div>
+    )
   );
 }
 

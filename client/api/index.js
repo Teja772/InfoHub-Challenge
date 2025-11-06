@@ -1,34 +1,29 @@
 // [PASTE THIS ENTIRE BLOCK INTO YOUR api/index.js FILE]
 
-// 1. Import all tools using the NEW 'import' syntax
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
 
-// 2. Create the server
 const app = express();
 app.use(cors());
 
-// Vercel gets these from your "Environment Variables" settings
 const WEATHER_KEY = process.env.WEATHER_API_KEY;
 const CURRENCY_KEY = process.env.CURRENCY_API_KEY;
 
-// --- API #1: QUOTE (Live API) ---
-app.get('/api/quote', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.quotable.io/random');
-        const data = {
-            quote: response.data.content,
-            author: response.data.author
-        };
-        res.json(data);
-    } catch (error) {
-        console.error("Quote API Error:", error.message);
-        res.status(500).json({ 
-            quote: "The only way to do great work is to love what you do.", 
-            author: "Steve Jobs (Fallback)" 
-        });
-    }
+// --- API #1: QUOTE (Using Reliable Mock Data) ---
+// This fixes the error and is allowed by the assignment.
+const quotes = [
+    { quote: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+    { quote: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+    { quote: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+    { quote: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
+    { quote: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" }
+];
+
+app.get('/api/quote', (req, res) => {
+    // Get a random quote from the array
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    res.json(randomQuote);
 });
 
 // --- API #2: WEATHER (Geolocation) ---
@@ -80,5 +75,5 @@ app.get('/api/currency', async (req, res) => {
     }
 });
 
-// Export the app for Vercel using the new 'export default' syntax
+// Export the app for Vercel
 export default app;
